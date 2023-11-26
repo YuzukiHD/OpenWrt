@@ -75,6 +75,12 @@
 		clock-frequency = <32768>;
 		clock-output-names = "ext-32k";
 	};
+	
+	clk_cpurppu: cpurppu {
+		#clock-cells = <0>;
+		compatible = "allwinner,periph-cpus-clock";
+		clock-output-names = "cpurppu";
+	};
 
 	cpus {
 		enable-method = "allwinner,sun8iw21p1";
