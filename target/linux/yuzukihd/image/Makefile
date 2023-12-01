@@ -24,7 +24,7 @@ define Build/sunxi-img
 		$(IMAGE_ROOTFS) \
 		$(CONFIG_TARGET_KERNEL_PARTSIZE) \
 		$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
-		syter_kit.elf
+		syter_boot_bin.bin
 	rm -f $@.boot
 
 endef
@@ -32,6 +32,7 @@ endef
 ### Devices ###
 define Device/Default
   PROFILES := Default
+  KERNEL_NAME := zImage
   KERNEL := kernel-bin
   IMAGES := sysupgrade.img.gz
 endef
