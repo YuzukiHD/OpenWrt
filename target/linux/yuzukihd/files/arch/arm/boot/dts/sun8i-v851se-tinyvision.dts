@@ -1,5 +1,5 @@
 /*
- * Allwinner Technology CO., Ltd. sun8iw18p1 soc board.
+ * Allwinner Technology CO., Ltd. sun8iw21p1 soc board.
  *
  * soc board support.
  */
@@ -8,9 +8,15 @@
 #include "sun8iw21p1.dtsi"
 
 /{
-	board = "V851SE", "V851SE-TinyVision";
-	compatible = "allwinner,v851s", "arm,sun8iw21p1";
+	model = "TinyVision";
+	board = "V851se", "V851se-TinyVision";
+	compatible = "allwinner,v851se", "arm,sun8iw21p1";
 	aliases {
+		serial0 = &uart0;
+	};
+
+	chosen {
+		bootargs = "mem=64M cma=4M root=/dev/mmcblk0p2 earlyprintk=sunxi-uart,0x02500000 loglevel=8 initcall_debug=0 rootwait console=ttyS0 init=/sbin/init";
 	};
 };
 
@@ -373,14 +379,14 @@
 	/*vqmmc-supply = <&reg_aldo1>;*/
 	/*emmc io vol 1.8v*/
 	/*vqmmc-supply = <&reg_eldo1>;*/
-	status = "okay";
+	status = "disabled";
 };
 
 &sdc0 {
 	bus-width = <4>;
-	cd-gpios = <&pio PF 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-	/*non-removable;*/
-	/*broken-cd;*/
+	/* cd-gpios = <&pio PF 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; */
+	non-removable;
+	broken-cd;
 	/*cd-inverted*/
 	/*data3-detect;*/
 	/*card-pwr-gpios = <&pio PH 0 1 1 2 0xffffffff>;*/

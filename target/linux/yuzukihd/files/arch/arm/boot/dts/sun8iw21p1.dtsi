@@ -49,7 +49,7 @@
 	};
 
 	chosen {
-		bootargs = "earlyprintk=sunxi-uart,0x02500000 loglevel=8 initcall_debug=0 console=ttyS0 init=/init";
+		bootargs = "earlyprintk=sunxi-uart,0x02500000 loglevel=8 initcall_debug=0 console=ttyS0 init=/sbin/init";
 		linux,initrd-start = <0x0 0x0>;
 		linux,initrd-end = <0x0 0x0>;
 	};
@@ -74,12 +74,6 @@
 		compatible = "fixed-clock";
 		clock-frequency = <32768>;
 		clock-output-names = "ext-32k";
-	};
-	
-	clk_cpurppu: cpurppu {
-		#clock-cells = <0>;
-		compatible = "allwinner,periph-cpus-clock";
-		clock-output-names = "cpurppu";
 	};
 
 	cpus {
@@ -369,33 +363,6 @@
 		};
 	};
 
-	pmu: power-management@ff000000 {
-		compatible = "allwinner,v853-pmu", "syscon", "simple-mfd";
-		reg = <0x0 0x07001000 0x0 0x400>;
-
-		pd: power-controller {
-			compatible = "allwinner,v853-power-controller";
-			clocks = <&clk_cpurppu>;
-			clock-names = "ppu";
-			#power-domain-cells = <1>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			/* These power domains are grouped by VD_LOGIC */
-			pd_e907@V853_PD_E907 {
-				reg = <V853_PD_E907>;
-			};
-
-			pd_npu@V853_PD_NPU {
-				reg = <V853_PD_NPU>;
-			};
-			
-			pd_ve@V853_PD_VE {
-				reg = <V853_PD_VE>;
-			};
-		};
-	};
-
 	soc: soc@3000000 {
 		compatible = "simple-bus";
 		#address-cells = <2>;
@@ -660,20 +627,6 @@
 			uart3_port = <3>;
 			uart3_type = <4>;
 			status = "disabled";
-		};
-
-		npu: npu@3050000 {
-			compatible = "allwinner,npu";
-			reg = <0x0 0x03050000 0x0 0x1000>;
-			device_type = "npu";
-			dev_name = "npu";
-			interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>;
-			clocks = <&ccu CLK_NPU>, <&ccu CLK_PLL_NPU_4X>;
-			clock-frequency = <504000000>;
-			interrupt-names = "npu";
-			iommus = <&mmu_aw 6 1>;
-			status = "okay";
-			power-domains = <&pd V853_PD_NPU>;
 		};
 
 		dma: dma-controller@3002000 {
