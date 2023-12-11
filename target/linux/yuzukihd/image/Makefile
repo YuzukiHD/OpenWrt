@@ -24,7 +24,7 @@ define Build/sunxi-img
 		$(IMAGE_ROOTFS) \
 		$(CONFIG_TARGET_KERNEL_PARTSIZE) \
 		$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
-		syter_boot_bin.elf
+		syter_boot_bin_card.bin
 	rm -f $@.boot
 
 endef
