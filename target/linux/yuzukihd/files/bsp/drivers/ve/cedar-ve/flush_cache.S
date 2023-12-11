@@ -153,7 +153,7 @@ ENTRY(cedar_dma_flush_range)
 	add     r0, r0, r2
 	cmp     r0, r1
 	bcc     1b
-//	dsb     st
+	dsb     st
 	bx      lr
 ENDPROC(cedar_dma_flush_range)
 #endif
