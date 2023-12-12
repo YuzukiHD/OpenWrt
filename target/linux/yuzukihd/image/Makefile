@@ -19,6 +19,7 @@ define Build/sunxi-img
 
 	mcopy -i $@.boot $(DTS_DIR)/$(DEVICE_DTS).dtb ::sunxi.dtb
 	mcopy -i $@.boot $(IMAGE_KERNEL) ::zImage
+	mcopy -i $@.boot config.ini ::config.ini
 	./gen_sunxi_sdcard_img.sh $@ \
 		$@.boot \
 		$(IMAGE_ROOTFS) \
