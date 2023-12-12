@@ -14,10 +14,6 @@
 	aliases {
 		serial0 = &uart0;
 	};
-
-	chosen {
-		bootargs = "mem=64M cma=4M root=/dev/mmcblk0p2 earlyprintk=sunxi-uart,0x02500000 loglevel=8 initcall_debug=0 rootwait console=ttyS0 init=/sbin/init";
-	};
 };
 
 &pio {
