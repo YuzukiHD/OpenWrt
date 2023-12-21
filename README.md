@@ -7,6 +7,10 @@
 1. **不要用 root 用户进行编译**
 2. 默认 wan 口启用防火墙
 
+## 支持的设备
+
+1. [TinyVision](https://github.com/YuzukiHD/TinyVision)
+
 ## 编译命令
 
 1. 首先装好 Linux 系统，推荐 Debian 11 或 Ubuntu LTS
