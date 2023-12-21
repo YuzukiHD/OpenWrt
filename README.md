@@ -1,3 +1,5 @@
+[ 中文 | [English]((https://github.com/YuzukiHD/OpenWrt/blob/openwrt-23.05/README.en.md)) ]
+
 # 本仓库基于 OpenWrt
 
 ## 注意
@@ -35,7 +37,7 @@
 （-j 后面是线程数，第一次编译推荐用单线程）
 
    ```bash
-   make download -j8
+   make download -j$(nproc)
    make V=s -j1
    ```
 
