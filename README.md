@@ -1,4 +1,4 @@
-[ 中文 | [English]((https://github.com/YuzukiHD/OpenWrt/blob/openwrt-23.05/README.en.md)) ]
+[ 中文 | [English](https://github.com/YuzukiHD/OpenWrt/blob/openwrt-23.05/README.en.md) ]
 
 # 本仓库基于 OpenWrt
 
