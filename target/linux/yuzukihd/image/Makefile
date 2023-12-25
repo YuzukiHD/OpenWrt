@@ -10,7 +10,7 @@ DEVICE_VARS += UBOOT_DEVICE_NAME
 FAT32_BLOCK_SIZE=1024
 FAT32_BLOCKS=$(shell echo $$(($(CONFIG_TARGET_KERNEL_PARTSIZE)*1024*1024/$(FAT32_BLOCK_SIZE))))
 
-define Build/sunxi-img
+define Build/syterkit-img
 	# Creates the final SD/eMMC images, 
 	# combining boot partition, root partition as well as the u-boot bootloader
 
@@ -30,10 +30,29 @@ define Build/sunxi-img
 
 endef
 
+define Build/uboot-img
+	# Creates the final SD/eMMC images, 
+	# combining boot partition, root partition as well as the u-boot bootloader
+
+	rm -f $@.boot
+	mkfs.fat $@.boot -C $(FAT32_BLOCKS)
+
+	mcopy -i $@.boot $(DTS_DIR)/$(DEVICE_DTS).dtb ::sunxi.dtb
+	mcopy -i $@.boot $(IMAGE_KERNEL) ::Image
+	mcopy -i $@.boot boot.scr ::boot.scr
+	./gen_sunxi_sdcard_img.sh $@ \
+		$@.boot \
+		$(IMAGE_ROOTFS) \
+		$(CONFIG_TARGET_KERNEL_PARTSIZE) \
+		$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
+		u-boot-h616.bin
+	rm -f $@.boot
+
+endef
+
 ### Devices ###
 define Device/Default
   PROFILES := Default
-  KERNEL_NAME := zImage
   KERNEL := kernel-bin
   IMAGES := sysupgrade.img.gz
 endef
