@@ -39,13 +39,14 @@ define Build/uboot-img
 
 	mcopy -i $@.boot $(DTS_DIR)/$(DEVICE_DTS).dtb ::sunxi.dtb
 	mcopy -i $@.boot $(IMAGE_KERNEL) ::Image
-	mcopy -i $@.boot boot.scr ::boot.scr
+	mcopy -i $@.boot $(STAGING_DIR_IMAGE)/BoardEnv.txt ::BoardEnv.txt
+	mcopy -i $@.boot $(STAGING_DIR_IMAGE)/boot.scr ::boot.scr
 	./gen_sunxi_sdcard_img.sh $@ \
 		$@.boot \
 		$(IMAGE_ROOTFS) \
 		$(CONFIG_TARGET_KERNEL_PARTSIZE) \
 		$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
-		u-boot-h616.bin
+		$(STAGING_DIR_IMAGE)/h616-u-boot-with-spl.bin
 	rm -f $@.boot
 
 endef
