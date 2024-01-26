@@ -1,0 +1,11 @@
+--- a/Kconfig
++++ b/Kconfig
+@@ -9,6 +9,8 @@
+ 
+ source "init/Kconfig"
+ 
++source "bsp/Kconfig"
++
+ source "kernel/Kconfig.freezer"
+ 
+ source "fs/Kconfig.binfmt"

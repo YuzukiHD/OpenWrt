@@ -1,0 +1,18 @@
+--- a/Makefile
++++ b/Makefile
+@@ -563,6 +563,7 @@
+ 		-I$(objtree)/arch/$(SRCARCH)/include/generated \
+ 		$(if $(building_out_of_srctree),-I$(srctree)/include) \
+ 		-I$(objtree)/include \
++		-I$(srctree)/bsp/include \
+ 		$(USERINCLUDE)
+ 
+ KBUILD_AFLAGS   := -D__ASSEMBLY__ -fno-PIE
+@@ -753,6 +754,7 @@
+ core-y		:=
+ drivers-y	:=
+ libs-y		:= lib/
++drivers-y	+= bsp/drivers/
+ endif # KBUILD_EXTMOD
+ 
+ # The all: target is the default when no target is given on the

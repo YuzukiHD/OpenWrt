@@ -250,3 +250,11 @@ define Device/xunlong_orangepi-2
   SOC := sun8i-h3
 endef
 TARGET_DEVICES += xunlong_orangepi-2
+
+define Device/yuzuki_tinyvision
+  DEVICE_VENDOR := YuzukiHD
+  DEVICE_MODEL := TinyVision
+  SOC := sun8i-v851se
+  IMAGE/sdcard.img.gz := syterkit-sdcard | append-metadata | gzip
+endef
+TARGET_DEVICES += yuzuki_tinyvision

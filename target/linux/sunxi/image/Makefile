@@ -13,19 +13,35 @@ DEVICE_VARS := SUNXI_DTS SUNXI_DTS_DIR
 KERNEL_LOADADDR:=0x40008000
 
 define Build/sunxi-sdcard
-	rm -f $@.boot
-	mkfs.fat $@.boot -C $(FAT32_BLOCKS)
+  rm -f $@.boot
+  mkfs.fat $@.boot -C $(FAT32_BLOCKS)
+  mcopy -i $@.boot $(STAGING_DIR_IMAGE)/$(DEVICE_NAME)-boot.scr ::boot.scr
+  mcopy -i $@.boot $(DTS_DIR)/$(SUNXI_DTS).dtb ::dtb
+  mcopy -i $@.boot $(IMAGE_KERNEL) ::uImage
+	
+  ./gen_sunxi_sdcard_img.sh $@ \
+  	$@.boot \
+  	$(IMAGE_ROOTFS) \
+  	$(CONFIG_SUNXI_SD_BOOT_PARTSIZE) \
+  	$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
+  	$(STAGING_DIR_IMAGE)/$(DEVICE_NAME)-u-boot-with-spl.bin
+  rm -f $@.boot
+endef
 
-	mcopy -i $@.boot $(STAGING_DIR_IMAGE)/$(DEVICE_NAME)-boot.scr ::boot.scr
-	mcopy -i $@.boot $(DTS_DIR)/$(SUNXI_DTS).dtb ::dtb
-	mcopy -i $@.boot $(IMAGE_KERNEL) ::uImage
-	./gen_sunxi_sdcard_img.sh $@ \
-		$@.boot \
-		$(IMAGE_ROOTFS) \
-		$(CONFIG_SUNXI_SD_BOOT_PARTSIZE) \
-		$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
-		$(STAGING_DIR_IMAGE)/$(DEVICE_NAME)-u-boot-with-spl.bin
-	rm -f $@.boot
+define Build/syterkit-sdcard
+  rm -f $@.boot
+  mkfs.fat $@.boot -C $(FAT32_BLOCKS)
+  mcopy -i $@.boot $(DTS_DIR)/$(SUNXI_DTS).dtb ::sunxi.dtb
+  mcopy -i $@.boot $(IMAGE_KERNEL) ::zImage
+  mcopy -i $@.boot config.ini ::config.ini
+	
+  ./gen_sunxi_sdcard_img.sh $@ \
+  	$@.boot \
+  	$(IMAGE_ROOTFS) \
+  	$(CONFIG_SUNXI_SD_BOOT_PARTSIZE) \
+  	$(CONFIG_TARGET_ROOTFS_PARTSIZE) \
+  	syter_boot_bin_card.bin
+  rm -f $@.boot
 endef
 
 # why \x00\x00\x00\x00 for zImage-initramfs
