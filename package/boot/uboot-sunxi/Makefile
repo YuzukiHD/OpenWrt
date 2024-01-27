@@ -339,6 +339,15 @@ define U-Boot/orangepi_zero2
   ATF:=h616
 endef
 
+define U-Boot/yuzukichameleon
+  BUILD_SUBTARGET:=cortexa53
+  NAME:=YuzukiHD Yuzuki Chameleon
+  BUILD_DEVICES:=yuzukichameleon
+  DEPENDS:=+PACKAGE_u-boot-yuzukichameleon:trusted-firmware-a-sunxi-h616
+  UENV:=h616
+  ATF:=h616
+endef
+
 define U-Boot/Bananapi_M2_Ultra
   BUILD_SUBTARGET:=cortexa7
   NAME:=Bananapi M2 Ultra
@@ -402,6 +411,7 @@ UBOOT_TARGETS := \
 	orangepi_2 \
 	orangepi_pc2 \
 	orangepi_zero2 \
+	yuzukichameleon \
 	pangolin \
 	pine64_plus \
 	Sinovoip_BPI_M3 \
