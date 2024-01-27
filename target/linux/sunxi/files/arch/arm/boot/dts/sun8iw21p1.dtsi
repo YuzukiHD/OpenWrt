@@ -19,8 +19,6 @@
 #include <dt-bindings/spi/sunxi-spi.h>
 
 / {
-	model = "sun8iw21";
-	compatible = "allwinner,sun8iw21p1";
 	interrupt-parent = <&wakeupgen>;
 	#address-cells = <2>;
 	#size-cells = <2>;

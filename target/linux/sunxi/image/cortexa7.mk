@@ -255,6 +255,7 @@ define Device/yuzuki_tinyvision
   DEVICE_VENDOR := YuzukiHD
   DEVICE_MODEL := TinyVision
   SOC := sun8i-v851se
+  KERNEL := kernel-bin
   IMAGE/sdcard.img.gz := syterkit-sdcard | append-metadata | gzip
 endef
 TARGET_DEVICES += yuzuki_tinyvision

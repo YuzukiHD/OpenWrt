@@ -8,9 +8,9 @@
 #include "sun8iw21p1.dtsi"
 
 /{
-	model = "TinyVision";
+	model = "YuzukiHD TinyVision";
 	board = "V851se", "V851se-TinyVision";
-	compatible = "allwinner,v851se", "arm,sun8iw21p1";
+	compatible = "yuzukihd,tinyvision", "allwinner,v851se", "arm,sun8iw21p1";
 	aliases {
 		serial0 = &uart0;
 	};
