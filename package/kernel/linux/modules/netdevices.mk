@@ -1555,6 +1555,25 @@ endef
 
 $(eval $(call KernelPackage,lan743x))
 
+define KernelPackage/aic8800
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=AIC8800 SDIO wireless module
+  KCONFIG:= \
+           CONFIG_AIC8800_WLAN_SUPPORT \
+           CONFIG_AIC8800_BTLPM_SUPPORT
+  FILES:= \
+         $(LINUX_DIR)/bsp/drivers/net/wireless/aic8800/aic8800_fdrv/aic8800_fdrv.ko \
+         $(LINUX_DIR)/bsp/drivers/net/wireless/aic8800/aic8800_bsp/aic8800_bsp.ko \
+         $(LINUX_DIR)/bsp/drivers/net/wireless/aic8800/aic8800_btlpm/aic8800_btlpm.ko
+  AUTOLOAD:=$(call AutoProbe,aic8800)
+endef
+
+define KernelPackage/aic8800/description
+  Kernel module for AIC8800 SDIO wireless module
+endef
+
+$(eval $(call KernelPackage,aic8800))
+
 define KernelPackage/amazon-ena
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Elastic Network Adapter (for Amazon AWS)
