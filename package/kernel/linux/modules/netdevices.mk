@@ -1585,6 +1585,22 @@ endef
 
 $(eval $(call KernelPackage,aic8800-bt))
 
+define KernelPackage/xr829
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=XR829 SDIO wireless module
+  KCONFIG:= \
+           CONFIG_XR829_WLAN \
+           CONFIG_XR829_SUSPEND_POWER_OFF
+  FILES:=$(LINUX_DIR)/bsp/drivers/net/wireless/xr829/xr829.ko
+  AUTOLOAD:=$(call AutoProbe,xr829)
+endef
+
+define KernelPackage/xr829/description
+  Kernel module for XR829 SDIO wireless module
+endef
+
+$(eval $(call KernelPackage,xr829))
+
 define KernelPackage/amazon-ena
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Elastic Network Adapter (for Amazon AWS)
